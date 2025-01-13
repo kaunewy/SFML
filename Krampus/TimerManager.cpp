@@ -1,85 +1,96 @@
 #include "TimerManager.h"
 
-Timer::Timer(const function<void()>& _callback(), const Time& _time, const bool _startRunning, const bool _isLoop)
+template<class ReturnType, typename ...Args>
+Timer<ReturnType, Args...>::Timer(const function<ReturnType(Args...)>& _callback, const Time& _time,
+    const bool _startRunning, const bool _isLoop)
 {
-	isRunning = _startRunning;
-	isLoop = _isLoop;
-	currentTime = 0.0;
-	duration = _time.asMilliseconds();
-	callback = _callback;
-}
-
-void Timer::Start()
-{
-	Reset();
-	Resume();
-}
-
-void Timer::Update(const float _deltaTime)
-{
-	if (!isRunning) return;
-
-	currentTime += _deltaTime;
-	if (currentTime >= duration)
-	{
-		if (callback)
-		{
-			callback();
-		}
-
-		if (!isLoop)
-		{
-			Stop();
-		}
-		Reset();
-	}
-}
-
-void Timer::Stop()
-{
+    isRunning = _startRunning;
+    isLoop = _isLoop;
+    currentTime = 0.0;
+    duration = _time.asMilliseconds();
+    callback = _callback;
 
 }
-
-void Timer::Resume()
+template<class ReturnType, typename ...Args>
+void Timer<ReturnType, Args...>::Start()
 {
-	isRunning = true;
+    Reset();
+    Resume();
 }
 
-void Timer::Reset()
+template<class ReturnType, typename ...Args>
+void Timer<ReturnType, Args...>::Update(const float _deltaTime)
 {
-	currentTime = 0.0;
+    if (!isRunning) return;
+
+    currentTime += _deltaTime;
+    if (currentTime >= duration)
+    {
+        if (callback)
+        {
+            callback();
+        }
+
+        if (!isLoop)
+        {
+            Stop();
+        }
+
+        Reset();
+    }
 }
 
-void Timer::Pause()
+template<class ReturnType, typename ...Args>
+void Timer<ReturnType, Args...>::Stop()
 {
-	isRunning = false;
 }
 
-void TimerManager::Update()
+template<class ReturnType, typename ...Args>
+void Timer<ReturnType, Args...>::Resume()
 {
-	for (Timer* _timer : allTimers)
-	{
-		//_timer->Update();
-	}
+    isRunning = true;
 }
 
-void TimerManager::Pause()
+template<class ReturnType, typename ...Args>
+void Timer<ReturnType, Args...>::Reset()
 {
-	for (Timer* _timer : allTimers)
-	{
-		_timer->Pause();
-	}
+    currentTime = 0.0;
 }
 
-TimerManager::~TimerManager()
+template<class ReturnType, typename ...Args>
+void Timer<ReturnType, Args...>::Pause()
 {
-	for (Timer* _timer : allTimers)
-	{
-		delete _timer;
-	}
+    isRunning = false;
 }
 
-TimerManager::TimerManager()
+template<class ReturnType, typename ...Args>
+TimerManager<ReturnType, Args...>::TimerManager()
 {
-	allTimers = set<Timer*>();
+}
+
+template<class ReturnType, typename ...Args>
+TimerManager< ReturnType, Args...>::~TimerManager()
+{
+    for (Timer< ReturnType, Args...>* _timer : allTimers)
+    {
+        delete _timer;
+    }
+}
+
+template<class ReturnType, typename ...Args>
+void TimerManager< ReturnType, Args...>::Update()
+{
+    for (Timer< ReturnType, Args...>* _timer : allTimers)
+    {
+
+    }
+}
+
+template<class ReturnType, typename ...Args>
+void TimerManager< ReturnType, Args...>::Pause()
+{
+    for (Timer< ReturnType, Args...>* _timer : allTimers)
+    {
+        _timer->Pause();
+    }
 }
