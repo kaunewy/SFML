@@ -5,6 +5,10 @@
 Game::Game()
 {
 	window = RenderWindow();
+
+	Actor* _background = new Actor({ 500, 500 }, "BackGround");
+	_background->GetShape()->SetPosition({ 250.f, 250.f });
+
 }
 
 Game::~Game()
@@ -15,9 +19,10 @@ Game::~Game()
 void Game::UpdateWindow()
 {
 	window.clear();
-	BackGround();
-	window.draw(*blackHole->GetBlackHole()->GetShape()->GetDrawable());
-	DisplayActor();
+	for (Actor* _actor : ActorManager::GetInstance().GetAllActors())
+	{
+		window.draw(*_actor->GetShape()->GetDrawable());
+	}
 	window.display();
 }
 
@@ -26,6 +31,7 @@ void Game::Start()
 	window.create(VideoMode(Vector2u(500, 500)), "Test", State::Windowed);
 	CreateBlackHole();
 	CreateRandomActor();
+	ActorManager::GetInstance().BeginPlay();
 }
 
 void Game::Update()
@@ -41,8 +47,8 @@ void Game::Update()
 				window.close();
 			}
 		}
-		const float _deltaTime = _timer.GetDeltaTime().asSeconds();
-		ActorManager::GetInstance().Tick(_deltaTime + 0.0001f);
+		const float _deltaTime = _timer.GetDeltaTime().asSeconds() + 0.0000001f;
+		ActorManager::GetInstance().Tick(_deltaTime);
 
 		UpdateWindow();
 	}
@@ -52,37 +58,13 @@ void Game::Stop()
 {
 }
 
-void Game::BackGround()
-{
-	RectangleShape _rectBG = RectangleShape({ 500,500 });
-	Texture _backGround = Texture("Assets/Textures/BackGround.png");
-	_rectBG.setTexture(&_backGround);
-	window.draw(_rectBG);
-}
 
 void Game::CreateBlackHole()
 {
 	blackHole = new BlackHole();
 }
 
-void Game::DisplayActor()
-{
-	for (Actor* _actor : ActorManager::GetInstance().GetAllActors())
-	{
-		MoveActor(_actor);
 
-		window.draw(*_actor->GetShape()->GetDrawable());
-	}
-}
-
-void Game::MoveActor(Actor* _actor)
-{
-	static float _degrees = 0;
-	_actor->GetShape()->SetRotation(degrees(_degrees += 0.01f));
-	Vector2f _currentPosition = { _actor->GetShape()->GetPosition().x, _actor->GetShape()->GetPosition().y };
-	_actor->GetShape()->SetScale({1.5f,1.5f});
-	_actor->GetShape()->SetPosition({ _currentPosition.x + 0.3f, _currentPosition.y + 0.3f });
-}
 
 void Game::CreateRandomActor()
 {
@@ -92,18 +74,16 @@ void Game::CreateRandomActor()
 		int _value = GetRandomNumberInRange(0, 2);
 		Vector2f _size = { float(GetRandomNumberInRange(5, 30)) ,float(GetRandomNumberInRange(5, 30)) };
 		Actor* _shape;
-		if (_value == 0)_shape = new Actor(_size.x);
-		else if(_value == 1) _shape = new Actor({ _size.x,_size.y });
+		if (_value == 0)_shape = new Actor(_size.x, "Star");
+		else if(_value == 1) _shape = new Actor({ _size.x,_size.y }, "Star");
 		else
 		{
-			_shape = new Actor(_size.x, "", IntRect(), 3);
+			_shape = new Actor(_size.x, "Star", IntRect(), 3);
 		}
-		
-		cout << _test++ << endl;
 
 		_shape->GetShape()->SetPosition({ float(GetRandomNumberInRange(0,500)),float(GetRandomNumberInRange(0,500)) });
-		_shape->GetShape()->SetOrigin(blackHole->GetBlackHole()->GetShape()->GetPosition());
-		ActorManager::GetInstance().AddActor(_shape);
+		//_shape->GetShape()->SetOrigin(blackHole->GetBlackHole()->GetShape()->GetPosition());
+		_shape->AddComponent(new ShootingStar(_shape));
 	}
 }
 

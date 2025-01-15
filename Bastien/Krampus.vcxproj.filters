@@ -40,6 +40,9 @@
     <Filter Include="BlackHole">
       <UniqueIdentifier>{f6c1e184-94b0-4f2f-9133-8ca4b9387a6a}</UniqueIdentifier>
     </Filter>
+    <Filter Include="Core\Components\ShootingStarComponent">
+      <UniqueIdentifier>{7797c450-6807-4d38-95d1-e57051879b18}</UniqueIdentifier>
+    </Filter>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="Main.cpp">
@@ -76,6 +79,9 @@
       <Filter>Fichiers sources</Filter>
     </ClCompile>
     <ClCompile Include="BlackHole.cpp">
+      <Filter>Fichiers sources</Filter>
+    </ClCompile>
+    <ClCompile Include="ShootingStar.cpp">
       <Filter>Fichiers sources</Filter>
     </ClCompile>
   </ItemGroup>
@@ -120,6 +126,9 @@
       <Filter>Fichiers d%27en-tête</Filter>
     </ClInclude>
     <ClInclude Include="BlackHole.h">
+      <Filter>Fichiers d%27en-tête</Filter>
+    </ClInclude>
+    <ClInclude Include="ShootingStar.h">
       <Filter>Fichiers d%27en-tête</Filter>
     </ClInclude>
   </ItemGroup>

@@ -10,13 +10,17 @@ Actor::Actor()
 Actor::Actor(const float _radius, const string& _path, const IntRect& _rect, const size_t& _pointCount)
 {
 	shape = new ShapeObject(_radius, _path,_rect, _pointCount);
+	shape->SetOrigin({ _radius, _radius });
 	TextureManager::GetInstance().Load(shape, _path, _rect);
+	Register();
 }
 
 Actor::Actor(const Vector2f& _size, const string& _path, const IntRect& _rect)
 {
 	shape = new ShapeObject(_size);
+	shape->SetOrigin(_size / 2.f);
 	TextureManager::GetInstance().Load(shape, _path, _rect);
+	Register();
 }
 
 Actor::~Actor()

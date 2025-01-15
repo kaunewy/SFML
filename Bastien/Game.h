@@ -3,6 +3,7 @@
 #include "Random.h"
 #include "Actor.h"
 #include "BlackHole.h"
+#include "ShootingStar.h"
 
 
 class Game : public Singleton<Game>
@@ -18,10 +19,7 @@ private:
 	void Start();
 	void Update();
 	void Stop();
-	void BackGround();
 	void CreateBlackHole();
-	void DisplayActor();
-	void MoveActor(Actor* _actor);
 	void CreateRandomActor();
 	void DeleteActor(Actor* _actor);
 	void ActorInBlackHole(Actor* _actor);

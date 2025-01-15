@@ -81,7 +81,7 @@ public:
 		lastFrameTime = DurationType();
 		elapsedTime = DurationType();
 		deltaTime = DurationType();
-		timeScale = DurationType();
+		timeScale = 1;
 		framesCount = 0;
 		maxFrameRate = 50;
 		fps = DurationType();
@@ -109,6 +109,7 @@ public:
 
 		time = GetTime(clock.getElapsedTime());
 		elapsedTime = time - lastTime;
+		deltaTime = elapsedTime * timeScale;
 		framesCount++;
 
 		if (lastFrameTime == 0 || time - lastFrameTime >= maxFrameRate)
