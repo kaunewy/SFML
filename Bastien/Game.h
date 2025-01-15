@@ -2,7 +2,6 @@
 #include "Singleton.h"
 #include "Random.h"
 #include "Actor.h"
-#include "LoggerData.h"
 
 
 class Game : public Singleton<Game>

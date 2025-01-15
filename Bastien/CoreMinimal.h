@@ -12,7 +12,6 @@
 #include <functional>
 #include <typeindex>
 #include <typeinfo>
-#include "Color.h"
 
 /// Collections
 #include <vector>
@@ -27,14 +26,6 @@
 #include "SFML/NetWork.hpp"
 #include "SFML/System.hpp"
 #include "SFML/Window.hpp"
-
-
-#define MSG(_msg) _msg << "(" << __FILE__ << " : " << __LINE__ << ")"
-#define ERROR(_msg) cerr << "Error =>" << MSG(_msg) << endl
-#define LOG(_msg) cout << "Verbosity : " << _verbosity " // " << _msg << endl
-#define FATAL(_msg) cout << RED << MSG(_msg) << COLORRESET << endl
-#define DISPLAY(_msg) cout << MSG(_msg) << endl
-#define WARNING(_msg) cout << "Warning => " <<  MSG(_msg) << endl
 
 using namespace std;
 using namespace sf;

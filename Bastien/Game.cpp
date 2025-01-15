@@ -23,7 +23,7 @@ void Game::UpdateWindow()
 void Game::Start()
 {
 	window.create(VideoMode(Vector2u(500, 500)), "Test", State::Windowed);
-	//CreateRandomActor();
+	CreateRandomActor();
 }
 
 void Game::Update()
@@ -40,7 +40,6 @@ void Game::Update()
 			}
 		}
 		const float _deltaTime = _timer.GetDeltaTime().asSeconds();
-		LoggerData(FATAL, "Une giga grosse erreur la !");
 		ActorManager::GetInstance().Tick(_deltaTime + 0.0001f);
 
 		UpdateWindow();
@@ -72,7 +71,7 @@ void Game::DisplayActor()
 {
 	for (Actor* _actor : ActorManager::GetInstance().GetAllActors())
 	{
-		//MoveActor(_actor);
+		MoveActor(_actor);
 
 		window.draw(*_actor->GetShape()->GetDrawable());
 	}
