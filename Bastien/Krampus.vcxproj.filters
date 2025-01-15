@@ -37,6 +37,9 @@
     <Filter Include="Core\Components">
       <UniqueIdentifier>{e6712815-f70e-4499-99e5-28fdab2a061a}</UniqueIdentifier>
     </Filter>
+    <Filter Include="BlackHole">
+      <UniqueIdentifier>{f6c1e184-94b0-4f2f-9133-8ca4b9387a6a}</UniqueIdentifier>
+    </Filter>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="Main.cpp">
@@ -70,6 +73,9 @@
       <Filter>Fichiers sources</Filter>
     </ClCompile>
     <ClCompile Include="TimerManager.cpp">
+      <Filter>Fichiers sources</Filter>
+    </ClCompile>
+    <ClCompile Include="BlackHole.cpp">
       <Filter>Fichiers sources</Filter>
     </ClCompile>
   </ItemGroup>
@@ -111,6 +117,9 @@
       <Filter>Fichiers d%27en-tête</Filter>
     </ClInclude>
     <ClInclude Include="Random.h">
+      <Filter>Fichiers d%27en-tête</Filter>
+    </ClInclude>
+    <ClInclude Include="BlackHole.h">
       <Filter>Fichiers d%27en-tête</Filter>
     </ClInclude>
   </ItemGroup>

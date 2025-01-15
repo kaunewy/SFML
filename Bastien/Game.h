@@ -2,11 +2,13 @@
 #include "Singleton.h"
 #include "Random.h"
 #include "Actor.h"
+#include "BlackHole.h"
 
 
 class Game : public Singleton<Game>
 {
 	RenderWindow window;
+	BlackHole* blackHole;
 
 public:
 	Game();
@@ -17,7 +19,7 @@ private:
 	void Update();
 	void Stop();
 	void BackGround();
-	void BlackHole();
+	void CreateBlackHole();
 	void DisplayActor();
 	void MoveActor(Actor* _actor);
 	void CreateRandomActor();

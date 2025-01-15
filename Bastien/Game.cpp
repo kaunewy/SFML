@@ -9,13 +9,14 @@ Game::Game()
 
 Game::~Game()
 {
+	delete blackHole;
 }
 
 void Game::UpdateWindow()
 {
 	window.clear();
 	BackGround();
-	BlackHole();
+	window.draw(*blackHole->GetBlackHole()->GetShape()->GetDrawable());
 	DisplayActor();
 	window.display();
 }
@@ -23,6 +24,7 @@ void Game::UpdateWindow()
 void Game::Start()
 {
 	window.create(VideoMode(Vector2u(500, 500)), "Test", State::Windowed);
+	CreateBlackHole();
 	CreateRandomActor();
 }
 
@@ -58,13 +60,9 @@ void Game::BackGround()
 	window.draw(_rectBG);
 }
 
-void Game::BlackHole()
+void Game::CreateBlackHole()
 {
-	RectangleShape _rectBH = RectangleShape({ 90,90 });
-	Texture _blackHole = Texture("Assets/Textures/BH.png");
-	_rectBH.setTexture(&_blackHole);
-	_rectBH.setPosition({ 260,300 });
-	window.draw(_rectBH);
+	blackHole = new BlackHole();
 }
 
 void Game::DisplayActor()
@@ -82,26 +80,29 @@ void Game::MoveActor(Actor* _actor)
 	static float _degrees = 0;
 	_actor->GetShape()->SetRotation(degrees(_degrees += 0.01f));
 	Vector2f _currentPosition = { _actor->GetShape()->GetPosition().x, _actor->GetShape()->GetPosition().y };
-	Vector2f _currentScale = { _actor->GetShape()->GetScale().x, _actor->GetShape()->GetScale().y };
-	_actor->GetShape()->SetScale({ 0.6f, 0.6f });
+	_actor->GetShape()->SetScale({1.5f,1.5f});
 	_actor->GetShape()->SetPosition({ _currentPosition.x + 0.3f, _currentPosition.y + 0.3f });
 }
 
 void Game::CreateRandomActor()
 {
+	int _test = 0;
 	for (unsigned int _i = 0; _i < 100; _i++)
 	{
 		int _value = GetRandomNumberInRange(0, 2);
 		Vector2f _size = { float(GetRandomNumberInRange(5, 30)) ,float(GetRandomNumberInRange(5, 30)) };
 		Actor* _shape;
-		if (_value == 0) _shape = new Actor(_size.x);
-		else _shape = new Actor({ _size.x,_size.y });
-
-		//Default Texture ne fonctionne pas sur les triangles
-		//_shape = new Actor(_size.x, "", 3);
+		if (_value == 0)_shape = new Actor(_size.x);
+		else if(_value == 1) _shape = new Actor({ _size.x,_size.y });
+		else
+		{
+			_shape = new Actor(_size.x, "", IntRect(), 3);
+		}
+		
+		cout << _test++ << endl;
 
 		_shape->GetShape()->SetPosition({ float(GetRandomNumberInRange(0,500)),float(GetRandomNumberInRange(0,500)) });
-		_shape->GetShape()->SetOrigin({ 260,300 });
+		_shape->GetShape()->SetOrigin(blackHole->GetBlackHole()->GetShape()->GetPosition());
 		ActorManager::GetInstance().AddActor(_shape);
 	}
 }

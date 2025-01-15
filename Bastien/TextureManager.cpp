@@ -18,7 +18,7 @@ void TextureManager::Load(ShapeObject* _shapeObject, const string& _path,
 {
     Texture& _texture = _shapeObject->GetTexture();
 
-    if (_path.empty())
+    if (_path == "")
     {
         cerr << "[Error] => Cannot open file with empty path"  << endl;
         _texture = GetDefaultTexture();
