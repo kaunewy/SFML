@@ -94,8 +94,8 @@ void Game::CreateRandomActor()
 		int _value = GetRandomNumberInRange(0, 2);
 		Vector2f _size = { float(GetRandomNumberInRange(5, 30)) ,float(GetRandomNumberInRange(5, 30)) };
 		Actor* _shape;
-		if (_value == 0) _shape = new Actor(_size.x, "DefaultTexture");
-		else _shape = new Actor({ _size.x,_size.y }, "DefaultTexture");
+		if (_value == 0) _shape = new Actor(_size.x);
+		else _shape = new Actor({ _size.x,_size.y });
 
 		//Default Texture ne fonctionne pas sur les triangles
 		//_shape = new Actor(_size.x, "", 3);

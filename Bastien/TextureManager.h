@@ -11,7 +11,7 @@ class TextureManager : public Singleton<TextureManager>
 private:
 	// Lazy pointeur
 	FORCEINLINE Texture GetDefaultTexture()
-	{
+	{               
 		if (!defaultTexture)
 		{
 			LoadDefaultTexture();

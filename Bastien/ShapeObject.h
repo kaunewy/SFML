@@ -58,7 +58,6 @@ public:
 public:
 	ShapeObject(const float _radius, const string& _path = "", const IntRect& _rect = IntRect(), const size_t& _pointCount = 30);
 	ShapeObject(const Vector2f& _size, const string& _path = "", const IntRect& _rect = IntRect());
-	ShapeObject(const int _size,  const string& _path = "", const int _pointsCount = 3, const IntRect& _rect = IntRect());
 	~ShapeObject();
 	
 public:

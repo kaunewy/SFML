@@ -19,12 +19,6 @@ Actor::Actor(const Vector2f& _size, const string& _path, const IntRect& _rect)
 	TextureManager::GetInstance().Load(shape, _path, _rect);
 }
 
-Actor::Actor(const int _size, const string& _path, const int _pointsCount, const IntRect& _rect)
-{
-	shape = new ShapeObject(_size);
-	TextureManager::GetInstance().Load(shape, _path, _rect);
-}
-
 Actor::~Actor()
 {
 	for (Component* _component : components)

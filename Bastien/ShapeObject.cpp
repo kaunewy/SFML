@@ -14,13 +14,6 @@ ShapeObject::ShapeObject(const Vector2f& _size, const string& _path, const IntRe
 	TextureManager::GetInstance().Load(this, _path, _rect);
 }
 
-ShapeObject::ShapeObject(const int _size, const string& _path, const int _pointsCount, const IntRect& _rect)
-{
-	shape = new ConvexShape(_size);
-	//shape->setPoint(0, { float(_size / 2), float(_size / 2) });
-	TextureManager::GetInstance().Load(this, _path, _rect);
-}
-
 ShapeObject::~ShapeObject()
 {
 	delete shape;
