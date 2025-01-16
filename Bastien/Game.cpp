@@ -49,7 +49,7 @@ void Game::Update()
 		}
 		const float _deltaTime = _timer.GetDeltaTime().asSeconds() + 0.0000001f;
 		ActorManager::GetInstance().Tick(_deltaTime);
-
+		ActorManager::GetInstance().BeginDestroy();
 		UpdateWindow();
 	}
 }
@@ -81,8 +81,7 @@ void Game::CreateRandomActor()
 			_shape = new Actor(_size.x, "Star", IntRect(), 3);
 		}
 
-		_shape->GetShape()->SetPosition({ float(GetRandomNumberInRange(0,500)),float(GetRandomNumberInRange(0,500)) });
-		//_shape->GetShape()->SetOrigin(blackHole->GetBlackHole()->GetShape()->GetPosition());
+		_shape->GetShape()->SetPosition({ float(GetRandomNumberInRange(0,600)),float(GetRandomNumberInRange(0,600)) });
 		_shape->AddComponent(new ShootingStar(_shape));
 	}
 }

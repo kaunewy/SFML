@@ -9,6 +9,7 @@ Actor::Actor()
 
 Actor::Actor(const float _radius, const string& _path, const IntRect& _rect, const size_t& _pointCount)
 {
+	shouldBeDestroy = false;
 	shape = new ShapeObject(_radius, _path,_rect, _pointCount);
 	shape->SetOrigin({ _radius, _radius });
 	TextureManager::GetInstance().Load(shape, _path, _rect);
@@ -17,6 +18,7 @@ Actor::Actor(const float _radius, const string& _path, const IntRect& _rect, con
 
 Actor::Actor(const Vector2f& _size, const string& _path, const IntRect& _rect)
 {
+	shouldBeDestroy = false;
 	shape = new ShapeObject(_size);
 	shape->SetOrigin(_size / 2.f);
 	TextureManager::GetInstance().Load(shape, _path, _rect);
@@ -41,6 +43,7 @@ void Actor::BeginPlay()
 
 void Actor::Tick(const float _deltaTime)
 {
+	
 	for (Component* _component : components)
 	{
 		_component->Tick(_deltaTime);

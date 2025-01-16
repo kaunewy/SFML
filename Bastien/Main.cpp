@@ -12,7 +12,6 @@ int main()
 
 
 
-   
 
    /* CircleShape _shape(100.0f);
     Texture _texture;*/

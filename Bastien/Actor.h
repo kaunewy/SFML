@@ -7,6 +7,7 @@ class Actor : public Core
 {
 	ShapeObject* shape;
 	set<Component*> components;
+	bool shouldBeDestroy;
 
 public:
 	FORCEINLINE void SetShape( ShapeObject* _shape)
@@ -19,6 +20,15 @@ public:
 		return shape;
 	}
 
+	FORCEINLINE bool GetDestroy() const
+	{
+		return shouldBeDestroy;
+	}
+
+	FORCEINLINE void SetDestroyTrue()
+	{
+		shouldBeDestroy = true;
+	}
 
 public:
 	Actor();

@@ -6,6 +6,7 @@ Component::Component(Actor* _owner)
 }
 
 
+
 void Component::BeginPlay()
 {
 }

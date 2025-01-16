@@ -3,6 +3,7 @@
 
 class ShootingStar : public Component
 {
+	Angle rotationFactor;
 
 public:
 	ShootingStar(Actor* _owner);
@@ -10,6 +11,5 @@ public:
 public:
 	virtual void BeginPlay() override;
 	virtual void Tick(const float _deltaTime);
-
 };
 

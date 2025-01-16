@@ -24,5 +24,8 @@ public:
 	void BeginPlay();
 	void Tick(const float _deltaTime);
 	void BeginDestroy();
+
+private:
+	void RemoveActor(Actor* _actor);
 };
 
