@@ -82,7 +82,7 @@
       <Filter>Fichiers sources</Filter>
     </ClCompile>
     <ClCompile Include="ShootingStar.cpp">
-      <Filter>Fichiers sources</Filter>
+      <Filter>Core\Components\ShootingStarComponent</Filter>
     </ClCompile>
   </ItemGroup>
   <ItemGroup>
@@ -129,7 +129,7 @@
       <Filter>Fichiers d%27en-tête</Filter>
     </ClInclude>
     <ClInclude Include="ShootingStar.h">
-      <Filter>Fichiers d%27en-tête</Filter>
+      <Filter>Core\Components\ShootingStarComponent</Filter>
     </ClInclude>
   </ItemGroup>
 </Project>

@@ -1,5 +1,6 @@
 #include "ActorManager.h"
 
+
 ActorManager::~ActorManager()
 {
 	for (Actor* _actor : allActors)
@@ -18,21 +19,14 @@ void ActorManager::BeginPlay()
 
 void ActorManager::Tick(const float _deltaTime)
 {
-	vector<Actor*> _carbageCollector;
 
 	for (Actor* _actor : allActors)
 	{
 		_actor->Tick(_deltaTime);
-		if (_actor->GetDestroy()) _carbageCollector.push_back(_actor);
-
+		if (_actor->GetDestroy()) carbageCollector.push_back(_actor);
 	}
 
-	while (!_carbageCollector.empty())
-	{
-		Actor* _actor = _carbageCollector.back();
-		_carbageCollector.pop_back();
-		RemoveActor(_actor);
-	}
+	CarbageCollector();
 
 }
 
@@ -49,4 +43,28 @@ void ActorManager::RemoveActor(Actor* _actor)
 	allActors.erase(_actor);
 	_actor->BeginDestroy();
 	delete _actor;
+}
+
+void ActorManager::CarbageCollector()
+{
+	while (!carbageCollector.empty())
+	{
+		Actor* _actor = carbageCollector.back();
+		carbageCollector.pop_back();
+		RemoveActor(_actor);
+	}
+}
+
+void ActorManager::RemoveAllActor()
+{
+
+	for (Actor* _actor : allActors)
+	{
+		if(_actor->GetComponent<ShootingStar>() != nullptr)
+		{
+			carbageCollector.push_back(_actor);
+		}
+	}
+
+	CarbageCollector();
 }

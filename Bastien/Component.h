@@ -11,7 +11,7 @@ protected:
 
 public:
 	Component(Actor* _owner);
-
+	virtual ~Component() {};
 public:
 
 	virtual void BeginPlay() override;

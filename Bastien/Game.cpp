@@ -46,6 +46,17 @@ void Game::Update()
 			{
 				window.close();
 			}
+			if (_event->is<Event::MouseButtonPressed>())
+			{
+				Vector2i _mousePos = Mouse::getPosition(window);
+
+				FloatRect _targetBounds(GetBlackHole()->GetBlackHole()->GetShape()->GetDrawable()->getGlobalBounds());
+
+				if (_targetBounds.contains(Vector2f(_mousePos)))
+				{
+					ActorManager::GetInstance().RemoveAllActor();
+				}
+			}
 		}
 		const float _deltaTime = _timer.GetDeltaTime().asSeconds() + 0.0000001f;
 		ActorManager::GetInstance().Tick(_deltaTime);
@@ -80,7 +91,6 @@ void Game::CreateRandomActor()
 		{
 			_shape = new Actor(_size.x, "Star", IntRect(), 3);
 		}
-
 		_shape->GetShape()->SetPosition({ float(GetRandomNumberInRange(0,600)),float(GetRandomNumberInRange(0,600)) });
 		_shape->AddComponent(new ShootingStar(_shape));
 	}

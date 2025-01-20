@@ -2,6 +2,8 @@
 #include "Core.h"
 #include "ShapeObject.h"
 #include "Component.h"
+#include "ShootingStar.h"
+
 
 class Actor : public Core
 {
@@ -50,9 +52,9 @@ public:
 	{
 		for (Component* _component : components)
 		{
-			if(is_same_v<decltype(_component), T>)
+			if(T* _cast = dynamic_cast<T*>(_component))
 			{
-				return dynamic_cast<T>(_component);
+				return _cast;
 			}
 		}
 		return nullptr;

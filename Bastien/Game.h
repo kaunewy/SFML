@@ -12,6 +12,12 @@ class Game : public Singleton<Game>
 	BlackHole* blackHole;
 
 public:
+	FORCEINLINE BlackHole* GetBlackHole() const
+	{
+		return blackHole;
+	}
+
+public:
 	Game();
 	~Game();
 
